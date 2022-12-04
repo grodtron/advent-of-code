@@ -10,6 +10,8 @@
 #include "range/v3/view/split.hpp"
 #include "range/v3/view/transform.hpp"
 
+#include "lib/ranges/max_n.hh"
+
 std::string read_file(std::string path) {
   std::ifstream input(path);
 
@@ -52,7 +54,13 @@ int main(int argc, char *argv[]) {
         return ranges::accumulate(rng | ranges::views::transform(to_int), 0);
       });
 
-  std::cout << ranges::max(sums) << std::endl;
+  std::cout << "The elf with the most calories has " << ranges::max(sums)
+            << std::endl;
+
+  const auto max_3 = ranges::accumulate(sums | gb::max_n<3>, 0);
+
+  std::cout << "The three elves with the most calories have " << max_3
+            << " in total" << std::endl;
 
   return 0;
 }
