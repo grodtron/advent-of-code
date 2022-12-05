@@ -10,27 +10,8 @@
 #include "range/v3/view/split.hpp"
 #include "range/v3/view/transform.hpp"
 
+#include "lib/io/read_file.hh"
 #include "lib/ranges/max_n.hh"
-
-std::string read_file(std::string path) {
-  std::ifstream input(path);
-
-  if (input.fail()) {
-    std::cerr << "Failed to open file " << path << std::endl;
-    return {};
-  }
-
-  std::stringstream ss;
-
-  input >> ss.rdbuf();
-
-  if (input.fail() && !input.eof()) {
-    std::cerr << "Error reading file " << path << std::endl;
-    return {};
-  }
-
-  return ss.str();
-}
 
 int to_int(std::string_view v) {
   int out;
@@ -39,7 +20,7 @@ int to_int(std::string_view v) {
 }
 
 int main(int argc, char *argv[]) {
-  const std::string contents = read_file(argv[1]);
+  const std::string contents = gb::read_file(argv[1]);
   std::cout << "Total size is " << contents.size() << std::endl;
 
   const auto lines =
