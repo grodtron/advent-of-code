@@ -10,7 +10,7 @@ cc_library(
     hdrs = ["max_n.hh"],
     copts = ["-std=c++20"],
     visibility = ["//visibility:public"]
-    )
+)
 
 cc_test(
     name = "test_max_n",
