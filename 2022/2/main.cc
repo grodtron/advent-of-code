@@ -46,6 +46,28 @@ int main(int argc, char *argv[]) {
 
     fmt::print("The total score when following the strategy is {}\n", result);
   }
+  {
+    const auto scores = contents | ranges::views::split('\n') |                        //
+                        ranges::views::transform([](auto &&r) {                        //
+                          const auto [a, b] = r | ranges::views::split(' ') |          //
+                                              ranges::views::transform(only_element) | //
+                                              gb::to_tuple<2>;
+
+                          const auto their_move = move_from_char(a);
+                          const auto desired_result = result_from_char(b);
+                          const auto my_move =
+                              my_move_for_desired_result(their_move, desired_result);
+
+                          return std::make_tuple(their_move, my_move);
+                        }) |                                        //
+                        ranges::views::transform([](auto &&moves) { //
+                          return std::apply(points, moves);
+                        });
+
+    const auto result = ranges::accumulate(scores, 0);
+
+    fmt::print("The total score when decoding the strategy correctly is {}\n", result);
+  }
 
   return 0;
 }
