@@ -56,4 +56,35 @@ int part_1(std::string input) {
   // return the sum over the whole input
   return ranges::accumulate(c, 0);
 }
-int part_2(std::string) { return 0; }
+
+int part_2(std::string input) {
+
+  const auto c =
+      // Split the individual lines of the input
+      input | ranges::views::split('\n') |
+      // Convert each line to a set of chars
+      ranges::views::transform(ranges::to<std::set>()) |
+      // get each set of 3 lines
+      ranges::views::chunk(3) |
+      // and fold them together via set intersection
+      ranges::views::transform([](auto &&rng) {
+        // Fold the range of two sets of chars (the two halves of the input line) via set
+        // intersection to find the common character
+        const auto intersection = *ranges::fold_left_first(rng, [](auto &&x, auto &&y) {
+          return ranges::views::set_intersection(x, y) | ranges::to<std::set>();
+        });
+
+        // Verify that there's only one shared char and return it
+        if (intersection.size() != 1) {
+          throw std::runtime_error(
+              fmt::format("There were multiple shared items in the two sections\n"));
+        }
+
+        return *intersection.begin();
+      }) |
+      // map to it's points value
+      ranges::views::transform(points_for_char);
+
+  // return the sum over the whole input
+  return ranges::accumulate(c, 0);
+}
