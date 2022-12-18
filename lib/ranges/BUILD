@@ -13,6 +13,13 @@ cc_library(
 )
 
 cc_library(
+    name = "to_sorted_pair",
+    hdrs = ["to_sorted_pair.hh"],
+    copts = ["-std=c++20"],
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
     name = "max_n",
     hdrs = ["max_n.hh"],
     copts = ["-std=c++20"],
@@ -45,6 +52,16 @@ cc_test(
     copts = ["-std=c++20"],
     deps = [
         ":to_int",
+        "@gtest//:gtest_main",
+    ]
+)
+
+cc_test(
+    name = "test_to_sorted_pair",
+    srcs = ["test_to_sorted_pair.cc"],
+    copts = ["-std=c++20"],
+    deps = [
+        ":to_sorted_pair",
         "@gtest//:gtest_main",
     ]
 )
