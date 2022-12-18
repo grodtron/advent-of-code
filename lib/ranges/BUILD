@@ -6,6 +6,13 @@ cc_library(
 )
 
 cc_library(
+    name = "to_int",
+    hdrs = ["to_int.hh"],
+    copts = ["-std=c++20"],
+    visibility = ["//visibility:public"]
+)
+
+cc_library(
     name = "max_n",
     hdrs = ["max_n.hh"],
     copts = ["-std=c++20"],
@@ -31,3 +38,14 @@ cc_test(
         "@gtest//:gtest_main",
     ]
 )
+
+cc_test(
+    name = "test_to_int",
+    srcs = ["test_to_int.cc"],
+    copts = ["-std=c++20"],
+    deps = [
+        ":to_int",
+        "@gtest//:gtest_main",
+    ]
+)
+
