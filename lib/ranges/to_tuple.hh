@@ -10,7 +10,7 @@ namespace gb {
 // just truncate the range if it has more elements than needed.
 template <size_t N> struct to_tuple_t {
 
-  template <typename Rng> auto operator()(Rng &&r) {
+  template <typename Rng> auto operator()(Rng &&r) const {
 
     return [r]<size_t... I>(std::index_sequence<I...>) {
       auto it = r.begin();
