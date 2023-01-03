@@ -1,7 +1,6 @@
 cc_library(
     name = "solution",
     srcs = ["solution.cc"],
-    hdrs = ["solution.hh"],
     copts = ["-std=c++2b"],
     deps = [
         "@ranges//:range-v3",

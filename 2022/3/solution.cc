@@ -18,7 +18,7 @@ int points_for_char(char c) {
   }
 }
 
-int part_1(std::string input) {
+int part_1_impl(std::string input) {
 
   const auto c =
       // Split the individual lines of the input
@@ -57,7 +57,7 @@ int part_1(std::string input) {
   return ranges::accumulate(c, 0);
 }
 
-int part_2(std::string input) {
+int part_2_impl(std::string input) {
 
   const auto c =
       // Split the individual lines of the input
@@ -88,3 +88,6 @@ int part_2(std::string input) {
   // return the sum over the whole input
   return ranges::accumulate(c, 0);
 }
+
+std::string part_1(std::string input) { return fmt::format("{}", part_1_impl(input)); }
+std::string part_2(std::string input) { return fmt::format("{}", part_2_impl(input)); }

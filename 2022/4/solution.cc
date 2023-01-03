@@ -1,5 +1,3 @@
-#include "2022/4/solution.hh"
-
 #include <functional>
 #include <string>
 #include <string_view>
@@ -39,7 +37,7 @@ auto parse_input(std::string input) {
          });
 }
 
-int part_1(std::string input) {
+int part_1_impl(std::string input) {
 
   const auto c = parse_input(input);
 
@@ -50,7 +48,7 @@ int part_1(std::string input) {
   });
 }
 
-int part_2(std::string input) {
+int part_2_impl(std::string input) {
   const auto c = parse_input(input);
 
   return ranges::count_if(c, [](auto &&p) {
@@ -71,3 +69,6 @@ int part_2(std::string input) {
         (bbeg <= abeg && aend <= bend);
   });
 }
+
+std::string part_1(std::string input) { return fmt::format("{}", part_1_impl(input)); }
+std::string part_2(std::string input) { return fmt::format("{}", part_2_impl(input)); }

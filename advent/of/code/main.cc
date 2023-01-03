@@ -3,8 +3,8 @@
 #include "lib/io/read_file.hh"
 #include <string>
 
-int part_1(std::string);
-int part_2(std::string);
+std::string part_1(std::string);
+std::string part_2(std::string);
 
 int main(int argc, char *argv[]) {
   if (argc != 2) {
